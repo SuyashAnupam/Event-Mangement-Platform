@@ -1,17 +1,17 @@
-public class Theatre {
+public class Venue {
 
-    private int theatreId;
+    private int venueId;
     private String name;
     private String location;
 
-    public Theatre(int theatreId, String name, String location) {
-        this.theatreId = theatreId;
+    public Venue(int venueId, String name, String location) {
+        this.venueId = venueId;
         this.name = name;
         this.location = location;
     }
 
-    public int getTheatreId() {
-        return theatreId;
+    public int getVenueId() {
+        return venueId;
     }
 
     public String getName() {
@@ -22,11 +22,11 @@ public class Theatre {
         return location;
     }
 
-    public void displayTheatre() {
+    public void displayVenue() {
 
         System.out.println("----------------------------------------");
-        System.out.println("Theatre ID : " + theatreId);
-        System.out.println("Theatre    : " + name);
+        System.out.println("Venue ID   : " + venueId);
+        System.out.println("Venue      : " + name);
         System.out.println("Location   : " + location);
         System.out.println("----------------------------------------");
     }

@@ -1,295 +1,126 @@
 import java.util.Scanner;
 
 public class Main {
-
     public static void main(String[] args) {
-
         Scanner sc = new Scanner(System.in);
-
-        MovieBookingSystem system =
-                new MovieBookingSystem();
-
-        Customer customer =
-                new Customer(
-                        1,
-                        "Suyash",
-                        "suyash@example.com"
-                );
-
+        EventManagementSystem system = new EventManagementSystem();
+        Customer customer = new Customer(1, "Suyash", "suyash@example.com");
         int choice;
 
         do {
-
-            System.out.println("\n");
-            System.out.println("╔══════════════════════════════════════╗");
-            System.out.println("║    MOVIE TICKET BOOKING SYSTEM       ║");
+            System.out.println("\n╔══════════════════════════════════════╗");
+            System.out.println("║       EVENT MANAGEMENT SYSTEM        ║");
             System.out.println("╚══════════════════════════════════════╝");
-
-            System.out.println("1. View Movies");
-            System.out.println("2. Search Movie");
-            System.out.println("3. Search Movie by Genre");
-            System.out.println("4. View Theatres");
-            System.out.println("5. View Shows");
+            System.out.println("1. View Events");
+            System.out.println("2. Search Event");
+            System.out.println("3. Search Event by Category");
+            System.out.println("4. View Venues");
+            System.out.println("5. View Event Schedules");
             System.out.println("6. View Available Seats");
-            System.out.println("7. Book Ticket");
+            System.out.println("7. Book Event Ticket");
             System.out.println("8. View My Bookings");
             System.out.println("9. Cancel Booking");
             System.out.println("10. My Profile");
             System.out.println("0. Exit");
-
             System.out.print("\nEnter your choice: ");
-
             choice = sc.nextInt();
-
             sc.nextLine();
 
             switch (choice) {
-
                 case 1:
-
-                    system.displayMovies();
-
+                    system.displayEvents();
                     break;
-
-
                 case 2:
-
-                    System.out.print(
-                            "Enter movie title: "
-                    );
-
-                    String title = sc.nextLine();
-
-                    system.searchMovie(title);
-
+                    System.out.print("Enter event name: ");
+                    system.searchEvent(sc.nextLine());
                     break;
-
-
                 case 3:
-
-                    System.out.print(
-                            "Enter genre: "
-                    );
-
-                    String genre = sc.nextLine();
-
-                    system.searchMovieByGenre(genre);
-
+                    System.out.print("Enter category: ");
+                    system.searchEventByCategory(sc.nextLine());
                     break;
-
-
                 case 4:
-
-                    system.displayTheatres();
-
+                    system.displayVenues();
                     break;
-
-
                 case 5:
-
-                    system.displayShows();
-
+                    system.displaySchedules();
                     break;
-
-
                 case 6:
-
-                    system.displayShows();
-
-                    System.out.print(
-                            "\nEnter Show ID: "
-                    );
-
-                    int seatShowId = sc.nextInt();
-
-                    Show seatShow =
-                            system.findShow(seatShowId);
-
-                    if (seatShow != null) {
-
-                        seatShow.displaySeats();
-
-                    } else {
-
-                        System.out.println(
-                                "Invalid Show ID."
-                        );
-                    }
-
+                    system.displaySchedules();
+                    System.out.print("\nEnter Schedule ID: ");
+                    EventSchedule seatSchedule = system.findSchedule(sc.nextInt());
+                    if (seatSchedule != null) seatSchedule.displaySeats();
+                    else System.out.println("Invalid Schedule ID.");
                     break;
-
-
                 case 7:
-
-                    system.displayShows();
-
-                    System.out.print(
-                            "\nEnter Show ID: "
-                    );
-
-                    int showId = sc.nextInt();
-
-                    Show selectedShow =
-                            system.findShow(showId);
-
-                    if (selectedShow == null) {
-
-                        System.out.println(
-                                "Invalid Show ID."
-                        );
-
-                        break;
-                    }
-
-                    selectedShow.displaySeats();
-
-                    System.out.println(
-                            "\nSeat Types:"
-                    );
-
-                    System.out.println(
-                            "1. REGULAR - ₹180"
-                    );
-
-                    System.out.println(
-                            "2. PREMIUM - ₹250"
-                    );
-
-                    System.out.println(
-                            "3. RECLINER - ₹350"
-                    );
-
-                    System.out.print(
-                            "Select seat type: "
-                    );
-
-                    int seatChoice = sc.nextInt();
-
-                    SeatType seatType;
-
-                    if (seatChoice == 1) {
-
-                        seatType = SeatType.REGULAR;
-
-                    } else if (seatChoice == 2) {
-
-                        seatType = SeatType.PREMIUM;
-
-                    } else if (seatChoice == 3) {
-
-                        seatType = SeatType.RECLINER;
-
-                    } else {
-
-                        System.out.println(
-                                "Invalid seat type."
-                        );
-
-                        break;
-                    }
-
-                    System.out.print(
-                            "Enter number of seats: "
-                    );
-
-                    int numberOfSeats = sc.nextInt();
-
-                    sc.nextLine();
-
-                    String[] seats =
-                            new String[numberOfSeats];
-
-                    for (int i = 0;
-                         i < numberOfSeats;
-                         i++) {
-
-                        System.out.print(
-                                "Enter seat " +
-                                (i + 1) +
-                                ": "
-                        );
-
-                        seats[i] =
-                                sc.nextLine()
-                                  .toUpperCase();
-                    }
-
-                    Booking booking =
-                            system.createBooking(
-                                    customer,
-                                    showId,
-                                    seatType,
-                                    seats
-                            );
-
-                    if (booking != null) {
-
-                        System.out.println(
-                                "\nBOOKING SUCCESSFUL!"
-                        );
-
-                        booking.displayBooking();
-
-                    } else {
-
-                        System.out.println(
-                                "\nBOOKING FAILED!"
-                        );
-                    }
-
+                    bookEventTicket(sc, system, customer);
                     break;
-
-
                 case 8:
-
                     customer.displayBookings();
-
                     break;
-
-
                 case 9:
-
                     customer.displayBookings();
-
-                    System.out.print(
-                            "\nEnter Booking ID to cancel: "
-                    );
-
-                    int bookingId = sc.nextInt();
-
-                    system.cancelBooking(
-                            bookingId
-                    );
-
+                    System.out.print("\nEnter Booking ID to cancel: ");
+                    system.cancelBooking(sc.nextInt());
                     break;
-
-
                 case 10:
-
                     customer.displayProfile();
-
                     break;
-
-
                 case 0:
-
-                    System.out.println(
-                            "\nThank you for using " +
-                            "Movie Ticket Booking System!"
-                    );
-
+                    System.out.println("\nThank you for using Event Management System!");
                     break;
-
-
                 default:
-
-                    System.out.println(
-                            "Invalid choice. Try again."
-                    );
+                    System.out.println("Invalid choice. Try again.");
             }
-
         } while (choice != 0);
-
         sc.close();
+    }
+
+    private static void bookEventTicket(Scanner sc, EventManagementSystem system,
+                                        Customer customer) {
+        system.displaySchedules();
+        System.out.print("\nEnter Schedule ID: ");
+        int scheduleId = sc.nextInt();
+        EventSchedule selectedSchedule = system.findSchedule(scheduleId);
+        if (selectedSchedule == null) {
+            System.out.println("Invalid Schedule ID.");
+            return;
+        }
+
+        selectedSchedule.displaySeats();
+        System.out.println("\nTicket Types:");
+        System.out.println("1. REGULAR - ₹199");
+        System.out.println("2. PREMIUM - ₹349");
+        System.out.println("3. VIP - ₹599");
+        System.out.print("Select ticket type: ");
+        int ticketChoice = sc.nextInt();
+        SeatType seatType;
+        if (ticketChoice == 1) seatType = SeatType.REGULAR;
+        else if (ticketChoice == 2) seatType = SeatType.PREMIUM;
+        else if (ticketChoice == 3) seatType = SeatType.VIP;
+        else {
+            System.out.println("Invalid ticket type.");
+            return;
+        }
+
+        System.out.print("Enter number of tickets: ");
+        int numberOfSeats = sc.nextInt();
+        if (numberOfSeats <= 0) {
+            System.out.println("Number of tickets must be positive.");
+            return;
+        }
+        sc.nextLine();
+        String[] seats = new String[numberOfSeats];
+        for (int i = 0; i < numberOfSeats; i++) {
+            System.out.print("Enter seat " + (i + 1) + ": ");
+            seats[i] = sc.nextLine().toUpperCase();
+        }
+
+        Booking booking = system.createBooking(customer, scheduleId, seatType, seats);
+        if (booking != null) {
+            System.out.println("\nBOOKING SUCCESSFUL!");
+            booking.displayBooking();
+        } else {
+            System.out.println("\nBOOKING FAILED!");
+        }
     }
 }

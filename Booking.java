@@ -4,7 +4,7 @@ public class Booking implements Bookable {
 
     private int bookingId;
     private Customer customer;
-    private Show show;
+    private EventSchedule schedule;
 
     private ArrayList<String> selectedSeats;
 
@@ -16,12 +16,12 @@ public class Booking implements Bookable {
 
     public Booking(int bookingId,
                    Customer customer,
-                   Show show,
+                   EventSchedule schedule,
                    SeatType seatType) {
 
         this.bookingId = bookingId;
         this.customer = customer;
-        this.show = show;
+        this.schedule = schedule;
         this.seatType = seatType;
 
         selectedSeats = new ArrayList<>();
@@ -39,7 +39,7 @@ public class Booking implements Bookable {
 
             seat = seat.toUpperCase();
 
-            if (!show.isSeatAvailable(seat)) {
+            if (!schedule.isSeatAvailable(seat)) {
 
                 System.out.println(
                         "Seat " + seat + " is not available."
@@ -55,7 +55,7 @@ public class Booking implements Bookable {
 
             seat = seat.toUpperCase();
 
-            show.bookSeat(seat);
+            schedule.bookSeat(seat);
 
             selectedSeats.add(seat);
         }
@@ -77,7 +77,7 @@ public class Booking implements Bookable {
 
         for (String seat : selectedSeats) {
 
-            show.cancelSeat(seat);
+            schedule.cancelSeat(seat);
         }
 
         status = BookingStatus.CANCELLED;
@@ -104,16 +104,16 @@ public class Booking implements Bookable {
     public void displayBooking() {
 
         System.out.println("\n========================================");
-        System.out.println("          MOVIE TICKET");
+        System.out.println("          EVENT TICKET");
         System.out.println("========================================");
 
         System.out.println("Booking ID : " + bookingId);
-        System.out.println("Customer   : " + customer.getName());
-        System.out.println("Movie      : " + show.getMovie().getTitle());
-        System.out.println("Theatre    : " + show.getTheatre().getName());
-        System.out.println("Location   : " + show.getTheatre().getLocation());
-        System.out.println("Date       : " + show.getDate());
-        System.out.println("Time       : " + show.getTime());
+        System.out.println("Attendee   : " + customer.getName());
+        System.out.println("Event      : " + schedule.getEvent().getName());
+        System.out.println("Venue      : " + schedule.getVenue().getName());
+        System.out.println("Location   : " + schedule.getVenue().getLocation());
+        System.out.println("Date       : " + schedule.getDate());
+        System.out.println("Time       : " + schedule.getTime());
 
         System.out.println("Seat Type  : " + seatType);
         System.out.println("Seats      : " + selectedSeats);

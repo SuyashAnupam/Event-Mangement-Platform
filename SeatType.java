@@ -1,7 +1,7 @@
 public enum SeatType {
-    REGULAR(180),
-    PREMIUM(250),
-    RECLINER(350);
+    REGULAR(199),
+    PREMIUM(349),
+    VIP(599);
 
     private final double price;
 

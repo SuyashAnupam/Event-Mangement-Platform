@@ -11,7 +11,7 @@ public class Customer extends User {
 
     @Override
     public void displayProfile() {
-        System.out.println("\n========== CUSTOMER PROFILE ==========");
+        System.out.println("\n========== ATTENDEE PROFILE ==========");
         System.out.println("User ID : " + getUserId());
         System.out.println("Name    : " + getName());
         System.out.println("Email   : " + getEmail());
@@ -27,7 +27,7 @@ public class Customer extends User {
 
     public void displayBookings() {
 
-        System.out.println("\n========== MY BOOKINGS ==========");
+        System.out.println("\n========== MY EVENT BOOKINGS ==========");
 
         if (bookings.isEmpty()) {
             System.out.println("No bookings found.");

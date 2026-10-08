@@ -1,22 +1,22 @@
 import java.util.HashMap;
 import java.util.Map;
 
-public class Show {
+public class EventSchedule {
 
-    private int showId;
-    private Movie movie;
-    private Theatre theatre;
+    private int scheduleId;
+    private Event event;
+    private Venue venue;
     private String date;
     private String time;
 
     private Map<String, Boolean> seats;
 
-    public Show(int showId, Movie movie, Theatre theatre,
+    public EventSchedule(int scheduleId, Event event, Venue venue,
                 String date, String time) {
 
-        this.showId = showId;
-        this.movie = movie;
-        this.theatre = theatre;
+        this.scheduleId = scheduleId;
+        this.event = event;
+        this.venue = venue;
         this.date = date;
         this.time = time;
 
@@ -38,16 +38,16 @@ public class Show {
         }
     }
 
-    public int getShowId() {
-        return showId;
+    public int getScheduleId() {
+        return scheduleId;
     }
 
-    public Movie getMovie() {
-        return movie;
+    public Event getEvent() {
+        return event;
     }
 
-    public Theatre getTheatre() {
-        return theatre;
+    public Venue getVenue() {
+        return venue;
     }
 
     public String getDate() {
@@ -106,13 +106,13 @@ public class Show {
         System.out.println("[ X ] = Booked");
     }
 
-    public void displayShow() {
+    public void displaySchedule() {
 
         System.out.println("----------------------------------------");
-        System.out.println("Show ID  : " + showId);
-        System.out.println("Movie    : " + movie.getTitle());
-        System.out.println("Theatre  : " + theatre.getName());
-        System.out.println("Location : " + theatre.getLocation());
+        System.out.println("Schedule ID : " + scheduleId);
+        System.out.println("Event       : " + event.getName());
+        System.out.println("Venue       : " + venue.getName());
+        System.out.println("Location    : " + venue.getLocation());
         System.out.println("Date     : " + date);
         System.out.println("Time     : " + time);
         System.out.println("----------------------------------------");
