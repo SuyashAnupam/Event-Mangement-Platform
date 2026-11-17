@@ -5,6 +5,11 @@ public class Admin extends User {
     }
 
     @Override
+    public String getRole() {
+        return "Admin";
+    }
+
+    @Override
     public void displayProfile() {
         System.out.println("\n========== ADMIN PROFILE ==========");
         System.out.println("Admin ID : " + getUserId());
