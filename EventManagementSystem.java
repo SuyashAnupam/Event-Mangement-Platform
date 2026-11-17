@@ -34,6 +34,39 @@ public class EventManagementSystem {
         schedules.add(new EventSchedule(304, e3, v2, "12-10-2026", "12:00 PM"));
     }
 
+    public ArrayList<Event> getEvents() { return events; }
+    public ArrayList<Venue> getVenues() { return venues; }
+    public ArrayList<EventSchedule> getSchedules() { return schedules; }
+
+    public ArrayList<String> getCategories() {
+        ArrayList<String> categories = new ArrayList<>();
+        for (Event event : events) {
+            if (!categories.contains(event.getCategory())) categories.add(event.getCategory());
+        }
+        return categories;
+    }
+
+    public ArrayList<EventSchedule> getSchedulesForEvent(Event event) {
+        ArrayList<EventSchedule> result = new ArrayList<>();
+        for (EventSchedule schedule : schedules) {
+            if (schedule.getEvent() == event) result.add(schedule);
+        }
+        return result;
+    }
+
+    // Returns events whose name contains the query AND match the category (blank = any)
+    public ArrayList<Event> findEvents(String query, String category) {
+        ArrayList<Event> result = new ArrayList<>();
+        String q = query == null ? "" : query.toLowerCase().trim();
+        for (Event event : events) {
+            boolean nameMatches = event.getName().toLowerCase().contains(q);
+            boolean categoryMatches = category == null || category.isBlank()
+                    || event.getCategory().equalsIgnoreCase(category);
+            if (nameMatches && categoryMatches) result.add(event);
+        }
+        return result;
+    }
+
     public void displayEvents() {
         System.out.println("\n========== AVAILABLE EVENTS ==========");
         for (Event event : events) event.displayEvent();
