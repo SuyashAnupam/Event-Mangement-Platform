@@ -85,6 +85,18 @@ public class Booking implements Bookable {
         return true;
     }
 
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public EventSchedule getSchedule() {
+        return schedule;
+    }
+
+    public SeatType getSeatType() {
+        return seatType;
+    }
+
     public int getBookingId() {
         return bookingId;
     }
