@@ -10,6 +10,11 @@ public class Customer extends User {
     }
 
     @Override
+    public String getRole() {
+        return "Attendee";
+    }
+
+    @Override
     public void displayProfile() {
         System.out.println("\n========== ATTENDEE PROFILE ==========");
         System.out.println("User ID : " + getUserId());
