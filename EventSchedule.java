@@ -9,6 +9,10 @@ public class EventSchedule {
     private String date;
     private String time;
 
+    public static final char FIRST_ROW = 'A';
+    public static final char LAST_ROW = 'D';
+    public static final int SEATS_PER_ROW = 5;
+
     private Map<String, Boolean> seats;
 
     public EventSchedule(int scheduleId, Event event, Venue venue,
@@ -27,9 +31,9 @@ public class EventSchedule {
 
     private void initializeSeats() {
 
-        for (char row = 'A'; row <= 'D'; row++) {
+        for (char row = FIRST_ROW; row <= LAST_ROW; row++) {
 
-            for (int number = 1; number <= 5; number++) {
+            for (int number = 1; number <= SEATS_PER_ROW; number++) {
 
                 String seat = row + String.valueOf(number);
 
@@ -61,6 +65,18 @@ public class EventSchedule {
     public boolean isSeatAvailable(String seat) {
 
         return seats.containsKey(seat) && seats.get(seat);
+    }
+
+    public int getAvailableSeatCount() {
+        int count = 0;
+        for (boolean free : seats.values()) {
+            if (free) count++;
+        }
+        return count;
+    }
+
+    public int getTotalSeatCount() {
+        return seats.size();
     }
 
     public boolean bookSeat(String seat) {
