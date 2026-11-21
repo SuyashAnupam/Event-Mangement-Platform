@@ -31,4 +31,6 @@ public abstract class User {
     }
 
     public abstract void displayProfile();
+
+    public abstract String getRole();
 }
