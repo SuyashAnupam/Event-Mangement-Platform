@@ -1,0 +1,7 @@
+{
+  "name": "event-management-presentation",
+  "private": true,
+  "description": "Builds Event_Management_System_OOP.pptx",
+  "scripts": { "build": "node build.js" },
+  "dependencies": { "pptxgenjs": "^3.12.0" }
+}
